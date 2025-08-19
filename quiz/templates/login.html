@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Register</h1>
+            <p class="lead">Enter your name and team number to begin.</p>
+        </header>
+        <div class="card login-card">
+            <form method="POST">
+                <label for="username">Name</label>
+                <input type="text" id="username" name="username" placeholder="Enter your name" required>
+                <label for="team_number">Team Number</label>
+                <input type="number" id="team_number" name="team_number" placeholder="Enter team number" min="1" required>
+                <div class="actions">
+                    <button type="submit">Start</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

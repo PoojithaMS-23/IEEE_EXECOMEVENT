@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scoreboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Scoreboard</h1>
+            <p class="lead">Live ranking of participants</p>
+        </header>
+        <div class="card score-card">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Score</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.team_number }}</td>
+                    <td>{{ user.total_score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="actions" style="margin-top:16px;">
+                <a href="{{ url_for('toppers') }}">View Team Toppers</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!-- templates/question.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Question {{ round_num }}</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="card question-card">
+			<h1>Question {{ round_num }}</h1>
+			<p>{{ question['question'] }}</p>
+
+			<div id="timer" class="timer"></div>
+
+			<form method="POST">
+				<input type="text" name="answer" placeholder="Your answer here" autocomplete="off" required />
+				<div class="actions">
+					<button type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+	let timeLeft = {{ allowed_time|tojson }};
+	let submitted = false;
+
+	const timerDisplay = document.getElementById('timer');
+
+	function formatTime(seconds) {
+		const mins = Math.floor(seconds / 60);
+		const secs = seconds % 60;
+		return `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+	}
+
+	function countdown() {
+		if (timeLeft <= 0 && !submitted) {
+			submitted = true;
+			alert("Time's up! Moving to next question.");
+			document.querySelector('input[name="answer"]').disabled = true;
+			document.querySelector('button[type="submit"]').disabled = true;
+			document.querySelector('form').submit();
+		} else if (!submitted) {
+			timerDisplay.textContent = "Time left: " + formatTime(timeLeft);
+			timeLeft--;
+			setTimeout(countdown, 1000);
+		}
+	}
+
+	countdown();
+	</script>
+</body>
+</html>
